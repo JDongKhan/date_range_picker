@@ -35,9 +35,13 @@ class DateRange {
       return start.year == other.start.year &&
           start.month == other.start.month &&
           start.day == other.start.day &&
+          start.hour == other.start.hour &&
+          start.minute == other.start.minute &&
           end.year == other.end.year &&
           end.month == other.end.month &&
-          end.day == other.end.day;
+          end.day == other.end.day &&
+          end.hour == other.end.hour &&
+          end.minute == other.end.minute;
     } else {
       return false;
     }

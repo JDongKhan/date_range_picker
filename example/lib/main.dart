@@ -215,6 +215,20 @@ class _MyHomePageState extends State<MyHomePage> {
         quickDateRanges: [
           QuickDateRange(dateRange: null, label: "Remove date range"),
           QuickDateRange(
+            label: 'Last 10 minute',
+            dateRange: DateRange(
+              DateTime.now().subtract(const Duration(minutes: 10)),
+              DateTime.now(),
+            ),
+          ),
+          QuickDateRange(
+            label: 'Last day',
+            dateRange: DateRange(
+              DateTime.now().subtract(const Duration(days: 0)),
+              DateTime.now(),
+            ),
+          ),
+          QuickDateRange(
             label: 'Last 3 days',
             dateRange: DateRange(
               DateTime.now().subtract(const Duration(days: 3)),
