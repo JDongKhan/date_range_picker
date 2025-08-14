@@ -65,6 +65,17 @@ class RangePickerController {
       startDate = date;
       onDateRangeChanged(DateRange(startDate!, startDate!));
     } else if (endDate == null) {
+      int diff = (date.difference(startDate!).inDays).abs();
+      if (minimumDateRangeLength != null && diff < minimumDateRangeLength!) {
+        startDate = date;
+        onDateRangeChanged(DateRange(startDate!, startDate!));
+        return;
+      }
+      if (maximumDateRangeLength != null && diff > maximumDateRangeLength!) {
+        startDate = date;
+        onDateRangeChanged(DateRange(startDate!, startDate!));
+        return;
+      }
       if (date == startDate) {
         endDate = date;
         onDateRangeChanged(DateRange(startDate!, endDate!));
