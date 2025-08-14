@@ -66,12 +66,12 @@ class RangePickerController {
       onDateRangeChanged(DateRange(startDate!, startDate!));
     } else if (endDate == null) {
       int diff = (date.difference(startDate!).inDays).abs();
-      if (minimumDateRangeLength != null && diff < minimumDateRangeLength!) {
+      if (minimumDateRangeLength != null && diff < (minimumDateRangeLength! - 1)) {
         startDate = date;
         onDateRangeChanged(DateRange(startDate!, startDate!));
         return;
       }
-      if (maximumDateRangeLength != null && diff > maximumDateRangeLength!) {
+      if (maximumDateRangeLength != null && diff > (maximumDateRangeLength! - 1)) {
         startDate = date;
         onDateRangeChanged(DateRange(startDate!, startDate!));
         return;
@@ -102,8 +102,7 @@ class RangePickerController {
     if (startDate == null || endDate == null) {
       return false;
     }
-    return dateIsStartOrEnd(date) ||
-        (date.isAfter(startDate!) && date.isBefore(endDate!));
+    return dateIsStartOrEnd(date) || (date.isAfter(startDate!) && date.isBefore(endDate!));
   }
 
   bool areSameDay(DateTime one, DateTime two) {
@@ -135,14 +134,11 @@ class RangePickerController {
 
     if (tmpStartDate != null && tmpEndDate == null) {
       var dateDifference = localizedDate.difference(tmpStartDate).inDays;
-      if (maximumDateRangeLength != null &&
-          dateDifference + 1 > maximumDateRangeLength!) {
+      if (maximumDateRangeLength != null && dateDifference + 1 > maximumDateRangeLength!) {
         return false;
       }
 
-      if (minimumDateRangeLength != null &&
-          dateDifference > 0 &&
-          dateDifference + 1 < minimumDateRangeLength!) {
+      if (minimumDateRangeLength != null && dateDifference > 0 && dateDifference + 1 < minimumDateRangeLength!) {
         return false;
       }
     }
@@ -249,8 +245,7 @@ class CalendarWidgetController {
   }
 
   /// The next month that can be displayed (two months can be displayed at the same time).
-  DateTime get nextMonth =>
-      DateTime(currentMonth.year, currentMonth.month + 1, 1);
+  DateTime get nextMonth => DateTime(currentMonth.year, currentMonth.month + 1, 1);
 
   /// Goes to the next month.
   void next() {
